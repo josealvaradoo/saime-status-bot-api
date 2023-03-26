@@ -1,14 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/josealvaradoo/saime-status-bot/src/handler"
-	"github.com/josealvaradoo/saime-status-bot/src/storage"
+	"github.com/josealvaradoo/saime-status-bot/src/domain/telegram"
+	handler "github.com/josealvaradoo/saime-status-bot/src/handler/saime"
+	storage "github.com/josealvaradoo/saime-status-bot/src/storage/cache"
+	"github.com/josealvaradoo/saime-status-bot/src/utils"
 )
 
 func main() {
+	bot := telegram.Bot{}
 	driver := storage.Redis
 	storage.New(driver)
 	app := fiber.New()
@@ -20,5 +24,6 @@ func main() {
 	status.Get("", handler.Get)
 	status.Post("", handler.Post)
 
-	log.Fatal(app.Listen(":3000"))
+	go bot.New()
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", utils.Env(utils.APP_PORT))))
 }

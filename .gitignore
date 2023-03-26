@@ -1,5 +1,6 @@
 .env
 .env.production
-temp/
-*/main
+/tmp
+/cache
+/main
 *.log

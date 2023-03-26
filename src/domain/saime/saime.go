@@ -1,14 +1,14 @@
-package domain
+package saime
 
 import (
 	"os/exec"
 
 	"github.com/josealvaradoo/saime-status-bot/src/model"
-	"github.com/josealvaradoo/saime-status-bot/src/repository"
+	repo "github.com/josealvaradoo/saime-status-bot/src/repository/saime"
 )
 
 func Get() (model.Saime, error) {
-	cache, err := repository.Get()
+	cache, err := repo.Get()
 
 	if err != nil {
 		return model.Saime{}, err
@@ -18,7 +18,7 @@ func Get() (model.Saime, error) {
 }
 
 func Set(status string) error {
-	_, err := repository.Update(status)
+	_, err := repo.Update(status)
 
 	if err != nil {
 		return err

@@ -1,6 +1,9 @@
-package storage
+package cache
 
 import (
+	"fmt"
+
+	"github.com/josealvaradoo/saime-status-bot/src/utils"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -22,8 +25,10 @@ func New(driver Driver) {
 }
 
 func newRedisConnection() {
+	host := utils.Env(utils.REDIS_HOST)
+	port := utils.Env(utils.REDIS_PORT)
 	cache = redis.NewClient(&redis.Options{
-		Addr:     "redis:6379",
+		Addr:     fmt.Sprintf("%s:%s", host, port),
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
