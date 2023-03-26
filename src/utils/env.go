@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	APP_PORT           = "APP_PORT"
+	PORT               = "PORT"
 	REDIS_HOST         = "REDIS_HOST"
 	REDIS_PORT         = "REDIS_PORT"
 	TELEGRAM_BOT_TOKEN = "TELEGRAM_BOT_TOKEN"

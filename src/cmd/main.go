@@ -25,5 +25,5 @@ func main() {
 	status.Post("", handler.Post)
 
 	go bot.New()
-	log.Fatal(app.Listen(fmt.Sprintf(":%s", utils.Env(utils.APP_PORT))))
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", utils.Env(utils.PORT))))
 }
