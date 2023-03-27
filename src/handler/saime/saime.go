@@ -49,6 +49,7 @@ func Post(c *fiber.Ctx) error {
 
 	if err != nil {
 		fmt.Println("Error checking availability")
+		fmt.Println(err.Error())
 		status = model.Offline
 	}
 

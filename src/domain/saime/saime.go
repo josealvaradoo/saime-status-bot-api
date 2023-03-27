@@ -2,7 +2,7 @@ package saime
 
 import (
 	"fmt"
-	"os/exec"
+	"net/http"
 
 	"github.com/josealvaradoo/saime-status-bot/src/model"
 	repo "github.com/josealvaradoo/saime-status-bot/src/repository/saime"
@@ -30,13 +30,10 @@ func Set(status string) error {
 
 func CheckAvailability() error {
 	url := "https://siic.saime.gob.ve"
-	curl := exec.Command("curl", url)
+	_, err := http.Get(url)
 
-	output, err := curl.Output()
 	if err != nil {
-		fmt.Println(string(output))
-	} else {
-		fmt.Println("Hubo un error intetando hacer curl a " + url)
+		fmt.Println("Hubo un error intetando hacer get a " + url)
 	}
 
 	return err
