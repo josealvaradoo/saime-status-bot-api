@@ -16,9 +16,9 @@ type Handler interface {
 
 func prepareBotMessage(status string) string {
 	if status == model.Offline {
-		return fmt.Sprintf("❌ La pagian del SAIME está: %s", status)
+		return fmt.Sprintf("❌ La página del SAIME está: %s", status)
 	}
-	return fmt.Sprintf("✅ La pagian del SAIME está: %s", status)
+	return fmt.Sprintf("✅ La página del SAIME está: %s", status)
 }
 
 func sendTelegramMessage(bot *telegram.Bot, prevStatus string, status string) {
