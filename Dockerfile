@@ -1,21 +1,21 @@
-FROM golang:latest
+FROM golang:latest AS builder
 
 # Set up the working directory
-RUN mkdir /app
 WORKDIR /app
 
-# Install Air
-RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-
-# Copy the project
+# Install dependencies
 COPY . .
-
-# Install modules
 RUN go mod download
 
 # Build
-RUN go build -o /main src/cmd/main.go
+RUN GOOS=linux GOARCH=amd64 go build -o /main src/cmd/main.go
+
+# Run the application
+FROM alpine
+
+COPY --from=builder app/.env .
+COPY --from=builder /main .
 
 EXPOSE 3000
 
-CMD ["../main"]
+ENTRYPOINT ["/main"]

@@ -10,8 +10,8 @@ import (
 
 const (
 	PORT               = "PORT"
-	REDIS_HOST         = "REDIS_HOST"
-	REDIS_PORT         = "REDIS_PORT"
+	REDIS_HOST         = "REDISHOST"
+	REDIS_PORT         = "REDISPORT"
 	TELEGRAM_BOT_TOKEN = "TELEGRAM_BOT_TOKEN"
 	TELEGRAM_CHAT_ID   = "TELEGRAM_CHAT_ID"
 )

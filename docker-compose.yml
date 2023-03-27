@@ -5,17 +5,16 @@ services:
     image: redis:6.2-alpine
     restart: always
     ports:
-      - "${REDIS_PORT}:6379"
+      - "${REDISPORT}:6379"
     volumes:
       - ./cache:/var/lib/redis/data
     networks:
       - saime
   app:
+    image: gcr.io/saime-status/saime-status:latest
     build: .
     ports:
       - "${PORT}:3000"
-    volumes:
-      - .:/app
     networks:
       - saime
     links:
