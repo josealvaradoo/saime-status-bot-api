@@ -48,15 +48,13 @@ func Post(c *fiber.Ctx) error {
 	err := saime.CheckAvailability()
 
 	if err != nil {
-		fmt.Println("Error checking availability")
-		fmt.Println(err.Error())
 		status = model.Offline
 	}
 
 	prev, err := saime.Get()
 
 	if err != nil {
-		sendTelegramMessage(&bot, "", status)
+		prev.Status = ""
 	}
 
 	sendTelegramMessage(&bot, prev.Status, status)

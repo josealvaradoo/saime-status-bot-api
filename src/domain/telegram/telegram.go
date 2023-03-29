@@ -1,7 +1,6 @@
 package telegram
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -33,8 +32,6 @@ func (t *Bot) New() {
 
 func (t *Bot) Notify(message string) error {
 	channelID, err := strconv.ParseInt(utils.Env(utils.TELEGRAM_CHAT_ID), 0, 64)
-
-	fmt.Println(channelID)
 
 	if err != nil {
 		log.Fatal(err)
