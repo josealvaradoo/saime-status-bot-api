@@ -5,25 +5,30 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/josealvaradoo/saime-status-bot/src/domain/saime"
 	"github.com/josealvaradoo/saime-status-bot/src/domain/telegram"
-	handler "github.com/josealvaradoo/saime-status-bot/src/handler/saime"
-	storage "github.com/josealvaradoo/saime-status-bot/src/storage/cache"
+	"github.com/josealvaradoo/saime-status-bot/src/router"
+
 	"github.com/josealvaradoo/saime-status-bot/src/utils"
+	"github.com/robfig/cron/v3"
 )
 
 func main() {
-	bot := telegram.Bot{}
-	driver := storage.Redis
-	storage.New(driver)
+	// Define Fiber API
 	app := fiber.New()
+	router.Saime(app)
 
-	api := app.Group("/api/v1")
+	// Initialize Cron job
+	c := cron.New()
+	c.AddFunc("@every 5m", func() {
+		saime.Post()
+	})
+	c.Start()
 
-	status := api.Group("/status")
-
-	status.Get("", handler.Get)
-	status.Post("", handler.Post)
-
+	// Initialize Telegram bot
+	bot := telegram.Bot{}
 	go bot.New()
+
+	// Initialize API
 	log.Fatal(app.Listen(fmt.Sprintf(":%s", utils.Env(utils.PORT))))
 }

@@ -1,35 +1,14 @@
 package saime
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/josealvaradoo/saime-status-bot/src/domain/saime"
-	"github.com/josealvaradoo/saime-status-bot/src/domain/telegram"
 	"github.com/josealvaradoo/saime-status-bot/src/model"
 )
 
 type Handler interface {
 	Check(c *fiber.Ctx) error
 	Set(c *fiber.Ctx, key string) error
-}
-
-func prepareBotMessage(status string) string {
-	if status == model.Offline {
-		return fmt.Sprintf("❌ La página del SAIME está: %s", status)
-	}
-	return fmt.Sprintf("✅ La página del SAIME está: %s", status)
-}
-
-func sendTelegramMessage(bot *telegram.Bot, prevStatus string, status string) {
-	if prevStatus != status {
-		message := prepareBotMessage(status)
-
-		err := bot.Notify(message)
-		if err != nil {
-			fmt.Println(err)
-		}
-	}
 }
 
 func Get(c *fiber.Ctx) error {
@@ -43,23 +22,7 @@ func Get(c *fiber.Ctx) error {
 }
 
 func Post(c *fiber.Ctx) error {
-	bot := telegram.Bot{}
-	var status string = model.Online
-	err := saime.CheckAvailability()
-
-	if err != nil {
-		status = model.Offline
-	}
-
-	prev, err := saime.Get()
-
-	if err != nil {
-		prev.Status = ""
-	}
-
-	sendTelegramMessage(&bot, prev.Status, status)
-
-	err = saime.Set(status)
+	status, err := saime.Post()
 
 	if err != nil {
 		return c.JSON(fiber.NewError(fiber.StatusBadGateway, err.Error()))

@@ -1,0 +1,9 @@
+.air.toml
+.env.example
+.editorconfig
+
+cache/
+tmp/
+
+README.md
+LICENSE
