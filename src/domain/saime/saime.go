@@ -17,15 +17,14 @@ func prepareBotMessage(status string) string {
 }
 
 func sendTelegramMessage(bot *telegram.Bot, prevStatus string, status string) {
-	if prevStatus != status {
-		// message := prepareBotMessage(status)
+	message := prepareBotMessage(status)
+	fmt.Println(message)
 
-		// err := bot.Notify(message)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// } else {
-		// 	fmt.Println(message)
-		// }
+	if prevStatus != status {
+		err := bot.Notify(message)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 }
 
