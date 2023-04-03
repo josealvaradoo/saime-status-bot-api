@@ -17,6 +17,8 @@ services:
       context: .
       dockerfile: .docker/Dockerfile.${ENV}
     container_name: app
+    volumes:
+      - .:/app
     ports:
       - "${PORT}:3000"
     networks:
