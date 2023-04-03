@@ -15,7 +15,7 @@ var (
 )
 
 func newFirestoreConnection() *firestore.Client {
-	keys := option.WithCredentialsFile(".gcp/credentials.json")
+	keys := option.WithCredentialsFile(utils.Env(utils.GOOGLE_APPLICATION_CREDENTIALS))
 	client, err := firestore.NewClient(Ctx, utils.Env(utils.GCP_PROJECT_ID), keys)
 
 	if err != nil {

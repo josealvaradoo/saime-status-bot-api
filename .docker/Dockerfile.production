@@ -17,6 +17,7 @@ RUN GOOS=linux GOARCH=amd64 go build -o /main src/cmd/main.go
 FROM alpine
 
 COPY --from=builder app/.env .
+COPY --from=builder app/.gcp/ ./.gcp
 COPY --from=builder /main .
 
 EXPOSE 3000
