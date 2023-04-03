@@ -18,25 +18,25 @@ func prepareBotMessage(status string) string {
 
 func sendTelegramMessage(bot *telegram.Bot, prevStatus string, status string) {
 	if prevStatus != status {
-		message := prepareBotMessage(status)
+		// message := prepareBotMessage(status)
 
-		err := bot.Notify(message)
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			fmt.Println(message)
-		}
+		// err := bot.Notify(message)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// } else {
+		// 	fmt.Println(message)
+		// }
 	}
 }
 
 func Get() (model.Saime, error) {
-	cache, err := repo.Get()
+	value, err := repo.Get()
 
 	if err != nil {
 		return model.Saime{}, err
 	}
 
-	return model.Saime{Status: cache.Status}, nil
+	return model.Saime{Status: value.Status}, nil
 }
 
 func Post() (string, error) {

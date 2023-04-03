@@ -1,9 +1,17 @@
-.air.toml
+# Hidden files
 .env.example
 .editorconfig
 
+# Docker
+.docker/
+docker-compose.yml
+
+# Data
 cache/
+
+# Temp
 tmp/
 
+# Miscellaneous
 README.md
 LICENSE

@@ -8,12 +8,16 @@ import (
 	"github.com/josealvaradoo/saime-status-bot/src/domain/saime"
 	"github.com/josealvaradoo/saime-status-bot/src/domain/telegram"
 	"github.com/josealvaradoo/saime-status-bot/src/router"
+	"github.com/josealvaradoo/saime-status-bot/src/storage/firestore"
 
 	"github.com/josealvaradoo/saime-status-bot/src/utils"
 	"github.com/robfig/cron/v3"
 )
 
 func main() {
+	// Initialize Firestore
+	firestore.New()
+
 	// Define Fiber API
 	app := fiber.New()
 	router.Saime(app)

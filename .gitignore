@@ -4,3 +4,4 @@
 /cache
 /main
 *.log
+.gcp/credentials.json

@@ -10,10 +10,12 @@ import (
 
 const (
 	PORT               = "PORT"
-	REDIS_HOST         = "REDISHOST"
-	REDIS_PORT         = "REDISPORT"
+	REDISHOST          = "REDISHOST"
+	REDISPORT          = "REDISPORT"
 	TELEGRAM_BOT_TOKEN = "TELEGRAM_BOT_TOKEN"
 	TELEGRAM_CHAT_ID   = "TELEGRAM_CHAT_ID"
+	GCP_PROJECT_ID     = "GCP_PROJECT_ID"
+	DB_DRIVER          = "DB_DRIVER"
 )
 
 func Env(key string) string {

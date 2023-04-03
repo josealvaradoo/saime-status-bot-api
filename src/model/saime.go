@@ -6,5 +6,5 @@ const (
 )
 
 type Saime struct {
-	Status string `json:"status,omitempty"`
+	Status string `firestore:"status" json:"status"`
 }
