@@ -2,6 +2,11 @@ package memory
 
 import "github.com/josealvaradoo/saime-status-bot/src/model"
 
+type Storage interface {
+	Get() (model.Saime, error)
+	Update(status string) (model.Saime, error)
+}
+
 type Memory struct {
 	Saime model.Saime
 }

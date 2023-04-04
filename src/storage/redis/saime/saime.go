@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/josealvaradoo/saime-status-bot/src/model"
-	"github.com/josealvaradoo/saime-status-bot/src/storage/cache"
+	"github.com/josealvaradoo/saime-status-bot/src/storage/redis"
 )
 
 var ctx = context.Background()
@@ -12,7 +12,8 @@ var ctx = context.Background()
 type Store struct{}
 
 func (s Store) Get() (model.Saime, error) {
-	status, err := cache.Cache().Get(ctx, "status").Result()
+	status, err := redis.Redis.Get(ctx, "status").Result()
+
 	if err != nil {
 		return model.Saime{Status: ""}, model.ErrStatusNotExists
 	}
@@ -21,7 +22,7 @@ func (s Store) Get() (model.Saime, error) {
 }
 
 func (s Store) Update(value string) (model.Saime, error) {
-	err := cache.Cache().Set(ctx, "status", value, 0).Err()
+	err := redis.Redis.Set(ctx, "status", value, 0).Err()
 
 	if err != nil {
 		return model.Saime{}, model.ErrStatusCanNotBeUpdated

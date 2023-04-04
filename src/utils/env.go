@@ -9,11 +9,14 @@ import (
 )
 
 const (
-	PORT               = "PORT"
-	REDIS_HOST         = "REDISHOST"
-	REDIS_PORT         = "REDISPORT"
-	TELEGRAM_BOT_TOKEN = "TELEGRAM_BOT_TOKEN"
-	TELEGRAM_CHAT_ID   = "TELEGRAM_CHAT_ID"
+	PORT                           = "PORT"
+	REDISHOST                      = "REDISHOST"
+	REDISPORT                      = "REDISPORT"
+	TELEGRAM_BOT_TOKEN             = "TELEGRAM_BOT_TOKEN"
+	TELEGRAM_CHAT_ID               = "TELEGRAM_CHAT_ID"
+	GCP_PROJECT_ID                 = "GCP_PROJECT_ID"
+	DB_DRIVER                      = "DB_DRIVER"
+	GOOGLE_APPLICATION_CREDENTIALS = "GOOGLE_APPLICATION_CREDENTIALS"
 )
 
 func Env(key string) string {
